@@ -11,6 +11,12 @@
 |
 */
 
+Route::group(['namespace' => 'Home'], function() {
+	Route::get('teacher', 'TeacherController@index');
+	Route::get('teacher/show/{id}', 'TeacherController@show');
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });

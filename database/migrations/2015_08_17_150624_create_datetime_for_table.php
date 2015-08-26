@@ -13,6 +13,9 @@ class CreateDatetimeForTable extends Migration
     public function up()
     {
         //
+        Schema::table('art_user', function ($table) {
+            $table->timestamps();
+        });
         Schema::table('art_teacher', function ($table) {
             $table->timestamps();
         });
@@ -28,7 +31,7 @@ class CreateDatetimeForTable extends Migration
         Schema::table('art_category', function ($table) {
             $table->timestamps();
         });
-        Schema::table('art_ collect', function ($table) {
+        Schema::table('art_collect', function ($table) {
             $table->timestamps();
         });
     }
