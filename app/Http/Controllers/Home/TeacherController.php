@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 
-// use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Teacher;
+
+use Validator;
 
 class TeacherController extends Controller
 {
@@ -31,6 +32,7 @@ class TeacherController extends Controller
     public function create()
     {
         //
+        return view('home.teacher.create');
     }
 
     /**
@@ -38,9 +40,22 @@ class TeacherController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(), Teacher::$rules);
+        if ($validator->fails()) {
+            return redirect()->bakc()->withInput()->withError($validator->error());
+        }
+        $rs = Teacher::create($request->all());
+        if ($rs) {
+            // 头像上传
+            // 身份证正反面上传
+            // 资质认证上传
+            return response()->json(['status' => 1, 'msg' => '注册成功']);
+        } else {
+            return response()->json(['status' => 0, 'msg' => 'fail']);
+        }
     }
 
     /**
@@ -56,7 +71,7 @@ class TeacherController extends Controller
         if (!$teacher || !$teacher->status) {
             return view('errors.404');
         }
-        
+
     }
 
     /**
