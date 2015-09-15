@@ -11,6 +11,22 @@
 |
 */
 
+
+
+Route::group(['prefix' => '/', 'namespace' => 'Home'], function() {
+	// 处理微信的请求消息
+	Route::any('wechat', 'WechatController@serve');
+	// ------ 教师相关 -------
+	Route::resource('teacher', 'TeacherController');
+	// Route::get('teacher', 'TeacherController@index');
+	// Route::get('teacher/show/{id}', 'TeacherController@show');
+	// 老师注册
+	// Route::get('teacher/add', 'TeacherController@create');
+	// Route::post('teacher/reg', 'TeacherController@store');
+
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });
